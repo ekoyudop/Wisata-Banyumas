@@ -23,16 +23,28 @@
         }
 
         .navbar-brand,
-        .navbar-nav .nav-link,
-        .btn-primary {
+        .navbar-nav .nav-link {
             color: white !important;
+        }
+
+        #banner-text {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="banner">
         <img src="nav-img.png" alt="">
+        <div id="banner-text">
+            <h1>Your Text Here</h1>
+            <p>Additional description if needed</p>
+        </div>
     </div>
     <!-- navbar -->
 
@@ -57,6 +69,14 @@
             </div>
         </div>
     </nav>
+
+    <div class="containe"></div>
+
+
+
+    <div class="container"></div>
+
+
 
     <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
