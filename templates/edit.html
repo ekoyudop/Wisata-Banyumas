@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/Logo.png" type="image/x-icon">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Ajax & JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <!-- Sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Link font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Contoh referensi Summernote -->
+    <link rel="stylesheet" href="../static/summernote/summernote-lite.css">
+    <script src="../static/summernote/summernote-lite.js"></script>
+
+    <title>Wisata Banyumas</title>
+    <style>
+        body {
+            background-color: #f3f4f5;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #17594A;
+        }
+
+        .menu button {
+            color: white;
+            transition: color 0.3s;
+            height: 50px;
+            width: 150px;
+            margin-left: 5px;
+            margin-right: 5px;
+            font-weight: bold;
+        }
+
+        .menu button:hover {
+            color: black;
+            background-color: white;
+        }
+
+        .row {
+            max-width: 1500px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .home-footer {
+            width: auto;
+            height: auto;
+            background-color: white;
+            margin: auto auto auto auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .home-footer1 {
+            width: 100%;
+            height: 30px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .konten-wisata {
+            width: 100%;
+            height: auto;
+            background-size: cover;
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1592741217769-2d961d29102c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        }
+
+        .form-input {
+            margin: 50px auto;
+            /* Center horizontally */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Set height to 100% of the viewport height for vertical centering */
+        }
+
+        .card {
+            height: 100%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            order: 1;
+            /* Untuk menempatkan brand di sebelah kiri */
+        }
+
+        .menu-container {
+            order: 2;
+            /* Untuk menempatkan menu di sebelah kanan */
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 100%;
+                height: 100%;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .menu-container {
+                margin-bottom: 10px;
+            }
+
+            .brand img {
+                width: 0px;
+            }
+        }
+
+        input {
+            width: 100%;
+            height: 38px;
+        }
+
+        /* textarea {
+            height: 110px;
+        } */
+
+        label {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 15px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function update(id_wisata) {
+            let nama_wisata = $('#nama-wisata').val()
+            let lokasi_wisata = $('#lokasi-wisata').val()
+            let link_gmaps = $('#link-gmaps').val()
+            let link_iframe = $('#link-iframe').val()
+            let deskripsi = $('#deskripsi').val()
+            let gambar_wisata = $("#gambar-wisata").prop("files")[0];
+
+            if (nama_wisata && lokasi_wisata && link_gmaps && link_iframe && deskripsi) {
+                let form_data = new FormData();
+
+                form_data.append("name_give", nama_wisata);
+                form_data.append("lokasi_give", lokasi_wisata);
+                form_data.append("gmaps_give", link_gmaps);
+                form_data.append("iframe_give", link_iframe);
+                form_data.append("deskripsi_give", deskripsi);
+
+                // Check if a new file is selected
+                if (gambar_wisata) {
+                    form_data.append("file_give", gambar_wisata);
+                }
+
+                $.ajax({
+                    type: "put",
+                    url: "/edit_wisata/" + id_wisata,
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response['result'] === 'success') {
+                            Swal.fire({
+                                title: "Berhasil!",
+                                text: response['msg'],
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                            // Menunda pengalihan halaman selama 2 detik
+                            setTimeout(function () {
+                                window.location.href = '/home';
+                            }, 2000);
+                        }
+                    },
+                });
+            } else {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Pastikan semua data terisi",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                return
+            }
+        }
+
+        function logout() {
+            $.removeCookie('mytoken', { path: '/' })
+            Swal.fire({
+                title: "Anda telah logout",
+                text: "Kami menanti kedatanganmu kembali 😊",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            // Menunda pengalihan halaman selama 2 detik
+            setTimeout(function () {
+                window.location.href = '/';
+            }, 2000);
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <nav class="navbar sticky-top">
+        <div class="container">
+            <div class="brand">
+                <img src="/static/Logo.png" alt="logo" width="100px">
+            </div>
+            <div class="menu-container text-center">
+                <div class="menu px-1">
+                    <button onclick="window.location.href='/home'" type="button" class="btn btn-outline-light">Home</button>
+                    <button onclick="logout()" type="button" class="btn btn-outline-light">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="konten-wisata">
+        <div class="row">
+            <div class="form-input">
+                <div class="card w-100" style="border-radius: 1em;">
+                    <div class="text-center mt-4">
+                        <h3 class="text-success text-uppercase">FORM</h3>
+                        <h3>EDIT DATA WISATA</h3>
+                    </div>
+                    <hr>
+                    <section class="card-body mt-3">
+                        <div class="row">
+                            <div class="mb-4">
+                                <label for="nama-wisata" class="form-label">Nama Wisata</label>
+                                <input type="text" class="form-control" id="nama-wisata" placeholder="Nama Wisata"
+                                    value="{{info_wisata.nama_wisata}}">
+                            </div>
+                            <div class="mb-4">
+                                <label for="lokasi-wisata" class="form-label">Lokasi</label>
+                                <input type="text" class="form-control" id="lokasi-wisata" placeholder="Lokasi Wisata"
+                                    value="{{info_wisata.lokasi_wisata}}">
+                            </div>
+                            <div class="mb-4">
+                                <label for="gambar-wisata" class="form-label">Gambar Wisata</label>
+                                <div class="imgwisata">
+                                    <img class="img-fluid" src="/static/wisata_pics/{{info_wisata.gambar_wisata}}"
+                                        alt="" style="width: 500px;">
+                                </div>
+                                <p>Note: Tidak perlu diisi jika tidak ingin mengganti gambar</p>
+                                <input class="form-control form-control" id="gambar-wisata" type="file">
+                                
+                            </div>
+                            <div class="mb-4">
+                                <label for="link-gmaps" class="form-label">Link Google Maps</label>
+                                <input type="text" class="form-control" id="link-gmaps"
+                                    placeholder="https://www.google.com/maps/place/... or https://maps.app.goo.gl/..."
+                                    value="{{info_wisata.link_gmaps}}">
+                            </div>
+                            <div class="mb-4">
+                                <label for="link-iframe" class="form-label">Link Iframe Google Maps</label>
+                                <input type="text" class="form-control" id="link-iframe"
+                                    placeholder="https://www.google.com/maps/embed..."
+                                    value="{{info_wisata.link_iframe}}">
+                            </div>
+                            <div class="mb-4">
+                                <label for="deskripsi-umum" class="form-label">Deskripsi Tempat</label>
+                                <textarea class="my-textarea" id="deskripsi" rows="3"
+                                    placeholder="Input some values">{{info_wisata.deskripsi}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button onclick="update('{{info_wisata._id}}')" class="btn btn-success me-md-2"
+                                type="button" style="width: 100%;">Simpan</button>
+                            <button onclick="window.location.href='/home'" class="btn btn-secondary"
+                                type="button">Kembali</button>
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="home-footer mt-5">
+        <div class="d-flex flex-wrap justify-content-evenly align-items-center" >
+            <img alt="logoittp" src="/static/ITTP_Logo.png" class="p-2" height="75px" />
+            <div class="p-2">
+                <b>Developer</b> <br>
+                <li>Akmal Fikri Muhammad Pasaribu</li>
+                <li>Eko Yudo Prayitno</li>
+                <li>Feriardus Orlan Banggur</li>
+            </div>
+        </div>
+    </footer>
+    <footer class="home-footer1">
+        <span class="home-text11">
+            ©2024 Develop by ITTP Student
+        </span>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            // Panggil Summernote menggunakan class my-textarea
+            $('.my-textarea').summernote({
+                height: 'auto', // Sesuaikan dengan kebutuhan tinggi yang diinginkan
+                minHeight: 100, // Tinggi minimum
+                maxHeight: 500, // Tinggi maksimum
+                overflowY: 'auto', // Overflow-y untuk menampilkan scrollbar jika diperlukan
+
+            });
+        });
+    </script>
+
+</body>
+
+</html>

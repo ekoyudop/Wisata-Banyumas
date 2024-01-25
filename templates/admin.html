@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/static/Logo.png" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
+    </script>
+
+    <!-- font family -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <title>Wisata Banyumas</title>
+    <style>
+        body {
+            background-color: #f3f4f5;
+        }
+
+        /* search */
+        .form-input {
+            display: flex;
+            align-items: center;
+            height: 60px;
+            width: 100%;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .form-input input {
+            flex-grow: 1;
+            padding: 0 16px;
+            height: 100%;
+            border: none;
+            background: white;
+            border-radius: 36px 0 0 36px;
+            outline: none;
+            width: 100%;
+            color: black;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .form-input button {
+            width: 100px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #17594A;
+            color: white;
+            font-size: 30px;
+            border: none;
+            outline: none;
+            border-radius: 0 36px 36px 0;
+            cursor: pointer;
+        }
+
+        .konten-wisata {
+            width: 100%;
+            margin: 20px auto 20px auto;
+            padding: 20px;
+            background-size: cover;
+            /* background-color: white; */
+            background-image: linear-gradient(0deg, rgba(239, 239, 239, 0.5), rgba(239, 239, 239, 0.5)), url("https://images.unsplash.com/photo-1592741217769-2d961d29102c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        }
+
+        .content-zoom h5 {
+            font-weight: bold;
+        }
+
+        .card a {
+            color: black;
+        }
+
+        .card a:hover {
+            color: white;
+        }
+
+        .content-zoom section:hover {
+            transform: scale(1.03);
+            border-radius: 1rem;
+            transition: .1s;
+            /* box-shadow: 0 0 20px rgba(40, 192, 17, 0.984); */
+
+            border: 3px solid #17594A;
+            background: linear-gradient(rgba(52, 173, 84, 0), #17594A);
+            color: white;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #17594A;
+        }
+
+        .menu button {
+            color: white;
+            transition: color 0.3s;
+            height: 50px;
+            width: 150px;
+            margin-left: 5px;
+            margin-right: 5px;
+            font-weight: bold;
+        }
+
+        .menu button:hover {
+            color: black;
+            background-color: white;
+        }
+
+        .row {
+            max-width: 1500px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .home-footer {
+            width: auto;
+            height: auto;
+            background-color: white;
+            margin: auto auto auto auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .home-footer1 {
+            width: 100%;
+            height: 30px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .img-fluid {
+            width: 100%;
+            height: 230px;
+        }
+
+        .card {
+            height: 100%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            order: 1;
+            /* Untuk menempatkan brand di sebelah kiri */
+        }
+
+        .menu-container {
+            order: 2;
+            /* Untuk menempatkan menu di sebelah kanan */
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 100%;
+                height: 100%;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .menu-container {
+                margin-bottom: 10px;
+            }
+
+            .brand img {
+                width: 0px;
+            }
+
+            .form-input input {
+                font-size: 14px;
+            }
+
+            .form-input {
+                height: 50px;
+            }
+        }
+
+        #content {
+            background-color: white;
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+        }
+    </style>
+    <script>
+        function logout() {
+            $.removeCookie('mytoken', { path: '/' })
+            Swal.fire({
+                title: "Anda telah logout",
+                text: "Kami menanti kedatanganmu kembali 😊",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            // Menunda pengalihan halaman selama 2 detik
+            setTimeout(function () {
+                window.location.href = '/';
+            }, 2000);
+        }
+
+        function delete_wisata(id_wisata) {
+            $.ajax({
+                type: "DELETE",
+                url: "/delete_wisata/" + id_wisata,
+                success: function (response) {
+                    if (response['result'] === 'success') {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: response['msg'],
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        // Menunda pengalihan halaman selama 2 detik
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                },
+            });
+        }
+
+        function delete_komentar(commentId) {
+            $.ajax({
+                type: "DELETE",
+                url: "/komentar/" + commentId,
+                success: function (response) {
+                    if (response['result'] === 'success') {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: response['msg'],
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        // Menunda pengalihan halaman selama 2 detik
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                },
+            });
+        }
+
+        function delete_likes(likesId) {
+            $.ajax({
+                type: "DELETE",
+                url: "/likes/" + likesId,
+                success: function (response) {
+                    if (response['result'] === 'success') {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: response['msg'],
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        // Menunda pengalihan halaman selama 2 detik
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                },
+            });
+        }
+
+        function delete_users(usersId) {
+            $.ajax({
+                type: "DELETE",
+                url: "/users/" + usersId,
+                success: function (response) {
+                    if (response['result'] === 'success') {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: response['msg'],
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        // Menunda pengalihan halaman selama 2 detik
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                },
+            });
+        }
+
+        function showContent(category) {
+            $('#data-wisata, #data-komentar, #data-likes, #data-users, #wisata-activate, #wisata-deactivate, #komentar-activate, #komentar-deactivate, #likes-activate, #likes-deactivate, #users-activate, #users-deactivate').hide();
+
+            if (category === 'wisata') {
+                $('#data-wisata').show();
+                $('#wisata-activate').show();
+                $('#komentar-deactivate').show();
+                $('#likes-deactivate').show();
+                $('#users-deactivate').show();
+            } else if (category === 'komentar') {
+                $('#data-komentar').show();
+                $('#wisata-deactivate').show();
+                $('#komentar-activate').show();
+                $('#likes-deactivate').show();
+                $('#users-deactivate').show();
+            } else if (category === 'likes') {
+                $('#data-likes').show();
+                $('#wisata-deactivate').show();
+                $('#komentar-deactivate').show();
+                $('#likes-activate').show();
+                $('#users-deactivate').show();
+            } else if (category === 'users') {
+                $('#data-users').show();
+                $('#wisata-deactivate').show();
+                $('#komentar-deactivate').show();
+                $('#likes-deactivate').show();
+                $('#users-activate').show();
+            } else {
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="navbar sticky-top">
+        <div class="container">
+            <div class="brand">
+                <img src="/static/Logo.png" alt="logo" width="100px">
+            </div>
+            <div class="menu-container text-center">
+                <div class="menu px-1">
+                    <button onclick="window.location.href='/home'" type="button"
+                        class="btn btn-outline-light">Home</button>
+                    <button onclick="logout()" type="button" class="btn btn-outline-light">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="text-center mb-3 pb-3 mt-5">
+        <h6 class="text-success text-uppercase" style="letter-spacing: 5px;">Admin</h6>
+        <h2> WISATA BANYUMAS</h2>
+    </div>
+
+    <div class="konten-wisata">
+        <div class="row">
+            <div class="d-flex flex-wrap mb-3">
+                <div class="p-1">
+                    <button onclick="showContent('wisata')" type="button" class="btn btn-primary btn"
+                        id="wisata-activate">Wisata</button>
+                    <button onclick="showContent('wisata')" type="button" class="btn btn-outline-primary btn"
+                        id="wisata-deactivate" style="display: none;">Wisata</button>
+                </div>
+                <div class="p-1">
+                    <button onclick="showContent('komentar')" type="button" class="btn btn-primary btn"
+                        id="komentar-activate" style="display: none;">Komentar</button>
+                    <button onclick="showContent('komentar')" type="button" class="btn btn-outline-primary btn"
+                        id="komentar-deactivate">Komentar</button>
+                </div>
+                <div class="p-1">
+                    <button onclick="showContent('likes')" type="button" class="btn btn-primary btn"
+                        id="likes-activate" style="display: none;">Likes</button>
+                    <button onclick="showContent('likes')" type="button" class="btn btn-outline-primary btn"
+                        id="likes-deactivate" >Likes</button>
+                </div>
+                <div class="p-1">
+                    <button onclick="showContent('users')" type="button" class="btn btn-primary btn"
+                        id="users-activate" style="display: none;">Users</button>
+                    <button onclick="showContent('users')" type="button" class="btn btn-outline-primary btn"
+                        id="users-deactivate">Users</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Data wisata Start -->
+        <div class="row" id="data-wisata">
+            <div class="col" id="content">
+                <div class="d-flex mb-3">
+                    <div class="me-auto p-2 mt-2">
+                        <h2>Data Wisata</h2>
+                    </div>
+                    <div class="p-2 mt-2">
+                        <a href="/halaman_tambah"><button type="button" class="btn btn-success btn"> Tambah Data
+                                +</button></a>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Lokasi</th>
+                            <th>Link GMaps</th>
+                            <th>Deskripsi</th>
+                            <th>Likes</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for wisata in list_wisata | reverse %}
+                        <tr>
+                            <td>{{wisata.nama_wisata}}</td>
+                            <td>{{wisata.lokasi_wisata}}</td>
+                            <td><a href="{{wisata.link_gmaps}}">{{wisata.link_gmaps}}</a></td>
+                            <td>{{wisata.deskripsi | safe}}</td>
+                            <td>{{wisata.like_counts}}</td>
+                            <td><a href="/halaman_edit/{{wisata._id}}"><button class="btn" id="edit"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                                        </svg></button></a>
+                                <button onclick="delete_wisata('{{wisata._id}}')" class="btn" id="delete"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                    </svg></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Data wisata End -->
+
+        <!-- Data komentar Start -->
+        <div class="row" id="data-komentar" style="display: none;">
+            <div class="col" id="content">
+                <div class="d-flex mb-3">
+                    <div class="me-auto p-2 mt-2">
+                        <h2>Data Komentar</h2>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID_Wisata</th>
+                            <th>Useremail</th>
+                            <th>Username</th>
+                            <th>Komentar</th>
+                            <th>Tanggal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for komentar in list_komentar | reverse %}
+                        <tr>
+                            <td><a href="/detail/{{komentar.id_wisata}}">{{komentar.id_wisata}}</a></td>
+                            <td>{{komentar.useremail}}</td>
+                            <td>{{komentar.username}}</td>
+                            <td>{{komentar.komentar | safe}}</td>
+                            <td>{{komentar.tanggal}}</td>
+                            <td><button onclick="delete_komentar('{{komentar._id}}')" class="btn" id="delete"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                    </svg></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Data komentar End -->
+
+        <!-- Data likes Start -->
+        <div class="row" id="data-likes" style="display: none;">
+            <div class="col" id="content">
+                <div class="d-flex mb-3">
+                    <div class="me-auto p-2 mt-2">
+                        <h2>Data Likes</h2>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID_Wisata</th>
+                            <th>Useremail</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for likes in list_likes | reverse %}
+                        <tr>
+                            <td><a href="/detail/{{likes.id_wisata}}">{{likes.id_wisata}}</a></td>
+                            <td>{{likes.useremail}}</td>
+                            <td><button onclick="delete_likes('{{likes._id}}')" class="btn" id="delete"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                    </svg></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Data likes End -->
+
+        <!-- Data Users Start -->
+        <div class="row" id="data-users" style="display: none;">
+            <div class="col" id="content">
+                <div class="d-flex mb-3">
+                    <div class="me-auto p-2 mt-2">
+                        <h2>Data Users</h2>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Useremail</th>
+                            <th>Username</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for users in list_users | reverse %}
+                        <tr>
+                            <td>{{users.useremail}}</a></td>
+                            <td>{{users.username}}</a></td>
+                            <td><button onclick="delete_users('{{users._id}}')" class="btn" id="delete"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                    </svg></button>
+                            </td>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Data Users End -->
+    </div>
+
+    <footer class="home-footer mt-5">
+        <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+            <img alt="logoittp" src="/static/ITTP_Logo.png" class="p-2" height="75px" />
+            <div class="p-2">
+                <b>Developer</b> <br>
+                <li>Akmal Fikri Muhammad Pasaribu</li>
+                <li>Eko Yudo Prayitno</li>
+                <li>Feriardus Orlan Banggur</li>
+            </div>
+        </div>
+    </footer>
+    <footer class="home-footer1">
+        <span class="home-text11">
+            ©2024 Develop by ITTP Student
+        </span>
+    </footer>
+
+
+</body>
+
+</html>
